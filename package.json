@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-typenv",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.20.0",
   "description": "A Vite plugin to use JS/TS files for environment variables instead of .env files",
   "author": "Kero Zhai <kerozhai@gmail.com>",
