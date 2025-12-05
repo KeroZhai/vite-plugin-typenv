@@ -1,0 +1,82 @@
+{
+  "name": "vite-plugin-typenv",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.20.0",
+  "description": "A Vite plugin to use JS/TS files for environment variables instead of .env files",
+  "author": "Kero Zhai <kerozhai@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/kerozhai/vite-plugin-typenv#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kerozhai/vite-plugin-typenv.git"
+  },
+  "bugs": "https://github.com/kerozhai/vite-plugin-typenv/issues",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "environment-variables",
+    "env",
+    "typescript"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./client": {
+      "types": "./client.d.ts"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "client.d.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "play": "nr -C playground play",
+    "prepare": "simple-git-hooks",
+    "prepublishOnly": "nr build",
+    "release": "bumpp",
+    "start": "tsx src/index.ts",
+    "test": "vitest",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vite": "^6.0.0 || ^7.0.0"
+  },
+  "dependencies": {
+    "esbuild": "catalog:prod",
+    "jiti": "catalog:prod"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:dev",
+    "@antfu/ni": "catalog:dev",
+    "@antfu/utils": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@vitejs/devtools": "catalog:dev",
+    "@vitejs/devtools-kit": "catalog:dev",
+    "bumpp": "catalog:dev",
+    "eslint": "catalog:dev",
+    "lint-staged": "catalog:dev",
+    "simple-git-hooks": "catalog:dev",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev",
+    "unbuild": "catalog:dev",
+    "vite": "catalog:dev",
+    "vitest": "catalog:dev",
+    "vue": "catalog:dev",
+    "vue-tsc": "catalog:dev"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
