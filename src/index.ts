@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite'
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { cwd } from 'node:process'
-import { loadEnvFile } from './utils'
+import process from 'node:process'
+import { expand, loadEnvFile } from './utils'
 
 export function defineDefaultVariables(vars: UserDefinedEnvVariables): UserDefinedEnvVariables {
   return vars
@@ -22,7 +22,7 @@ export default function envPlugin(): Plugin {
 
     async config(config, { mode }) {
       if (config.envDir !== false) {
-        envDir = resolve(config.envDir ?? config.root ?? cwd())
+        envDir = resolve(config.envDir ?? config.root ?? process.cwd())
         envPrefix = config.envPrefix ?? envPrefix
         const prefixes = Array.isArray(envPrefix) ? envPrefix : [envPrefix]
 
@@ -46,6 +46,22 @@ export default function envPlugin(): Plugin {
 
           await loadEnvFile(filePath, envVariables)
         }
+
+        // test NODE_ENV override before expand as otherwise process.env.NODE_ENV would override this
+        if (envVariables.NODE_ENV && process.env.VITE_USER_NODE_ENV === undefined) {
+          process.env.VITE_USER_NODE_ENV = envVariables.NODE_ENV
+        }
+        // support BROWSER and BROWSER_ARGS env variables
+        if (envVariables.BROWSER && process.env.BROWSER === undefined) {
+          process.env.BROWSER = envVariables.BROWSER
+        }
+        if (envVariables.BROWSER_ARGS && process.env.BROWSER_ARGS === undefined) {
+          process.env.BROWSER_ARGS = envVariables.BROWSER_ARGS
+        }
+
+        const processEnv = { ...process.env }
+
+        expand({ parsed: envVariables, processEnv })
 
         // convert to vite define
         const definitions: Record<string, any> = {}

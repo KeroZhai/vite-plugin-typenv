@@ -72,3 +72,22 @@ export default defineVariables({
 
 > [!NOTE]
 > By default, only variables prefixed with `VITE_` are exposed to your Vite-processed code. You can customize this behavior by setting the [`envPrefix`](https://vite.dev/config/shared-options#envprefix) option.
+
+Also, variables expanding is supported and enabled by default. The core logic is directly copied from [dotenv-expand](https://github.com/motdotla/dotenv-expand), refer to [their docs](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow) to learn more about the syntax.
+
+Note that if you want to use `$` in your env variables, you need to escape it with `\`.
+
+```js
+// env.local.js
+import { defineVariables } from 'vite-plugin-typenv'
+
+export default defineVariables({
+  VITE_USERNAME: 'keroz',
+  VITE_MESSAGE: 'Hello $VITE_USERNAME', // Hello keroz
+  VITE_ESCAPED_MESSAGE: '\\$foo', // $foo
+})
+```
+
+> [!NOTE]
+> - `env.*.local.js/ts` files are local-only and can contain sensitive variables. You should add `*.local.js/ts` to your `.gitignore` to avoid them being checked into git.
+> - Since any variables exposed to your Vite source code will end up in your client bundle, `VITE_*` variables should not contain any sensitive information.
