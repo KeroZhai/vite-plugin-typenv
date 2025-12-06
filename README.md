@@ -14,11 +14,11 @@ Add it to your Vite config:
 ```js
 // vite.config.js
 import { defineConfig } from 'vite'
-import Typenv from 'vite-plugin-typenv'
+import typenv from 'vite-plugin-typenv'
 
 export default defineConfig({
   plugins: [
-    Typenv(),
+    typenv(),
   ],
 })
 ```
