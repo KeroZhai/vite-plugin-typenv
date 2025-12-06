@@ -51,7 +51,6 @@
     "vite": "^6.0.0 || ^7.0.0"
   },
   "dependencies": {
-    "esbuild": "catalog:prod",
     "jiti": "catalog:prod"
   },
   "devDependencies": {

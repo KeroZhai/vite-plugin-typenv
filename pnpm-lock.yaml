@@ -70,9 +70,6 @@ catalogs:
       specifier: ^3.1.3
       version: 3.1.5
   prod:
-    esbuild:
-      specifier: ^0.0.0
-      version: 0.0.0
     jiti:
       specifier: ^2.6.1
       version: 2.6.1
@@ -81,9 +78,6 @@ importers:
 
   .:
     dependencies:
-      esbuild:
-        specifier: catalog:prod
-        version: 0.0.0
       jiti:
         specifier: catalog:prod
         version: 2.6.1
@@ -1648,9 +1642,6 @@ packages:
 
   es-module-lexer@1.7.0:
     resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
-
-  esbuild@0.0.0:
-    resolution: {integrity: sha512-mFH2NQiWPz0p48pP+Uzy39rTrn+xUYOSFBDGbUhtqnpze4JagLA3DSxryGej/pw8TgckPcE6fjhk+8O9PBX8TA==}
 
   esbuild@0.25.12:
     resolution: {integrity: sha512-bbPBYYrtZbkt6Os6FiTLCTFxvq4tt3JKall1vRwshA3fdVztsLAatFaZobhkBC8/BrPetoa0oksYoKXoG4ryJg==}
@@ -4880,8 +4871,6 @@ snapshots:
       is-arrayish: 0.2.1
 
   es-module-lexer@1.7.0: {}
-
-  esbuild@0.0.0: {}
 
   esbuild@0.25.12:
     optionalDependencies:
