@@ -45,6 +45,29 @@ interface UserDefinedEnvVariables {
 }
 ```
 
+Remember to add `vite/client` and `vite-plugin-typenv/client` inside your `tsconfig.json`:
+
+```
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["vite/client", "vite-plugin-typenv/client"]
+  }
+}
+```
+
+<details>
+  <summary>Using triple-slash directive</summary>
+  Alternatively, you can add the following directive to your `vite-env.d.ts` file:
+
+  ```ts
+  // src/vite-env.d.ts
+  /// <reference types="vite/client" />
+  /// <reference types="vite-plugin-typenv/client" />
+  ```
+
+</details>
+
 > [!NOTE]
 > After doing this, `import.meta.env` will also be typed.
 
