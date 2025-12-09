@@ -32,7 +32,7 @@ env.[mode].js       # only loaded in specified mode
 env.[mode].local.js # only loaded in specified mode, ignored by git
 ```
 
-To get TypeScript IntelliSense, create an `vite-env.d.ts` in `src` directory, and augment `UserDefinedEnvVariables`(instead of `ImportMetaEnv`, see [Intellisense for TypeScript](https://vite.dev/guide/env-and-mode#intellisense-for-typescript) for more info) like this:
+To get TypeScript IntelliSense, create an `vite-env.d.ts` in `src` directory, and augment `UserDefinedEnvVariables` (instead of `ImportMetaEnv`, see [Intellisense for TypeScript](https://vite.dev/guide/env-and-mode#intellisense-for-typescript) for more details):
 
 ```ts
 // src/vite-env.d.ts
@@ -45,7 +45,7 @@ interface UserDefinedEnvVariables {
 }
 ```
 
-Remember to add `vite/client` and `vite-plugin-typenv/client` inside your `tsconfig.json`:
+Then add `vite/client` and `vite-plugin-typenv/client` to your `tsconfig.json`:
 
 ```
 // tsconfig.json
@@ -96,7 +96,7 @@ export default defineVariables({
 > [!NOTE]
 > By default, only variables prefixed with `VITE_` are exposed to your Vite-processed code. You can customize this behavior by setting the [`envPrefix`](https://vite.dev/config/shared-options#envprefix) option.
 
-Also, variables expanding is supported and enabled by default. The core logic is directly copied from [dotenv-expand](https://github.com/motdotla/dotenv-expand), refer to [their docs](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow) to learn more about the syntax.
+Also, variables expansion is supported and enabled by default. The core logic is directly copied from [dotenv-expand](https://github.com/motdotla/dotenv-expand), refer to [their docs](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow) to learn more about the syntax.
 
 Note that if you want to use `$` in your env variables, you need to escape it with `\`.
 
