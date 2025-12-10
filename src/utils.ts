@@ -38,14 +38,18 @@ export function expand(options: { parsed: Record<string, any>, processEnv?: Reco
     if (processEnv[key] && processEnv[key] !== value) {
       value = processEnv[key]
     }
-    else {
+    else if (typeof value === 'string') {
       value = expandValue(value, processEnv, runningParsed)
     }
 
-    options.parsed[key] = _resolveEscapeSequences(value)
+    if (typeof value === 'string') {
+      value = _resolveEscapeSequences(value)
+    }
+
+    options.parsed[key] = value
 
     // for use with progressive expansion
-    runningParsed[key] = _resolveEscapeSequences(value)
+    runningParsed[key] = value
   }
 
   for (const processKey in options.parsed) {
@@ -59,7 +63,6 @@ function _resolveEscapeSequences(value: string): string {
   return value.replace(/\\\$/g, '$')
 }
 
-// @ts-nocheck
 function expandValue(value: string, processEnv: Record<string, any>, runningParsed: Record<string, any>): string {
   const env = { ...runningParsed, ...processEnv } // process.env wins
 
