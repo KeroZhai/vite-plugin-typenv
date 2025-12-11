@@ -58,6 +58,7 @@ Then add `vite/client` and `vite-plugin-typenv/client` to your `tsconfig.json`:
 
 <details>
   <summary>Using triple-slash directive</summary>
+
   Alternatively, you can add the following directive to your `vite-env.d.ts` file:
 
   ```ts
