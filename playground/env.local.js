@@ -2,5 +2,5 @@
 import { defineVariables } from 'vite-plugin-typenv'
 
 export default defineVariables({
-  VITE_APP_TITLE: 'Vite App Local',
+  VITE_APP_TITLE: '$VITE_APP_NAME (local)',
 })

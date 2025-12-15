@@ -1,5 +1,9 @@
 interface UserDefinedEnvVariables {
   /**
+   * App name
+   */
+  readonly VITE_APP_NAME: string
+  /**
    * App title
    */
   readonly VITE_APP_TITLE: string
