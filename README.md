@@ -115,3 +115,21 @@ export default defineVariables({
 > [!NOTE]
 > - `env.*.local.js/ts` files are local-only and can contain sensitive variables. You should add `*.local.js/ts` to your `.gitignore` to avoid them being checked into git.
 > - Since any variables exposed to your Vite source code will end up in your client bundle, `VITE_*` variables should not contain any sensitive information.
+
+To use environment variables in Vite config file, you can use `loadEnv` helper function:
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import { loadEnv } from 'vite-plugin-typenv'
+
+export default defineConfig(async ({ mode }) => {
+  const env = await loadEnv(mode)
+
+  return {
+    base: env.VITE_BASE_URL
+  }
+})
+```
+
+See also [Using Environment Variables in Config](https://vite.dev/config/#using-environment-variables-in-config) in Vite docs.
