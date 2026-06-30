@@ -13,7 +13,11 @@ export default defineConfig(async ({ mode }) => {
     plugins: [
       vue(),
       unoCss(),
-      typenv(),
+      typenv({
+        runtimeEnv: {
+          enabled: true,
+        },
+      }),
     ],
   }
 })

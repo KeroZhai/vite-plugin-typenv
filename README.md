@@ -1,5 +1,11 @@
 # vite-plugin-typenv
-Use JS/TS files for environment variables over `.env` files, and provides complete TypeScript type support.
+
+Use JS/TS files for environment variables over `.env` files.
+
+## Highlights
+
+- **JS/TS as env files** — write environment variables in JavaScript or TypeScript with full type safety and IntelliSense.
+- **Runtime config** — enable dynamic configuration after deployment; edit a JSON file on the server without rebuilding.
 
 ## Usage
 
@@ -133,3 +139,40 @@ export default defineConfig(async ({ mode }) => {
 ```
 
 See also [Using Environment Variables in Config](https://vite.dev/config/#using-environment-variables-in-config) in Vite docs.
+
+## Runtime Configuration
+
+When you deploy your app to a server, you may want to change some configuration without rebuilding. This plugin writes a `config.json` file to the output directory during build, which can be modified on the server at any time.
+
+Enable it in your Vite config:
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import typenv from 'vite-plugin-typenv'
+
+export default defineConfig({
+  plugins: [
+    typenv({
+      runtimeEnv: {
+        enabled: true,
+        name: 'config', // default, produces config.json
+        include: ['VITE_API_URL', 'VITE_APP_TITLE'], // optional: limit which keys are runtime-editable
+      },
+    }),
+  ],
+})
+```
+
+During `vite build`, all resolved environment variables are written to the output directory (e.g., `dist/config.json`), making it available at the root of your deployed site.
+
+To access the config at runtime, import the virtual module `virtual:typenv/runtime`:
+
+```ts
+// main.ts or any component
+import env from 'virtual:typenv/runtime'
+
+// In dev: values from env files (loaded by loadEnv).
+// In production: values from /config.json on the server.
+console.log(env.VITE_APP_TITLE)
+```

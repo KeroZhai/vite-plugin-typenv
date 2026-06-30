@@ -2,7 +2,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "play": "vite"
+    "play": "vite",
+    "preview": "vite build && vite preview"
   },
   "dependencies": {
     "vue": "catalog:dev"
